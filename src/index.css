@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Gen-Z Aurora Dark Mode */
+  --neon-blue: #4d4dff;
+  --neon-cyan: #00f0ff;
+  --neon-purple: #b026ff;
+  --neon-pink: #ff2a7a;
+  --neon-red: #ff2a7a;
+  --neon-gold: #ffbe0b;
+
+  --bg-color: #05050a;
+  --panel-bg: rgba(20, 20, 35, 0.4);
+  --border-color: rgba(255, 255, 255, 0.08);
+  --text-main: #f0f0f5;
+  --text-dim: #9aa0a6;
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 8px;
+}
+
+.theme-light {
+  /* Clean Gen-Z Light Mode */
+  --bg-color: #f7f9fc;
+  --panel-bg: rgba(255, 255, 255, 0.6);
+  --border-color: rgba(0, 0, 0, 0.05);
+  --text-main: #1a1a24;
+  --text-dim: #6e7681;
+  --neon-blue: #2563eb;
+  --neon-cyan: #06b6d4;
+  --neon-purple: #9333ea;
+  --neon-pink: #e11d48;
+  --glass-border: rgba(0, 0, 0, 0.08);
+}
+
+.theme-red {
+  --neon-blue: #ff004c;
+  --neon-cyan: #f00;
+  --neon-purple: #8a0000;
+  --border-color: rgba(255, 0, 0, 0.15);
+  --bg-color: #0a0000;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  /* Aurora Glow Background */
+  background-image:
+    radial-gradient(circle at 15% 50%, rgba(176, 38, 255, 0.15), transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(0, 240, 255, 0.15), transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(255, 42, 122, 0.1), transparent 50%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+  height: 100vh;
+  position: relative;
+}
+
+/* Floating blur orbs backround */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.5px;
+}
+
+button {
+  font-family: 'Space Grotesk', sans-serif;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: inherit;
+  outline: none;
+}
+
+input,
+textarea {
+  font-family: 'Outfit', sans-serif;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+/* Sidebar & Panels with Supreme Glassmorphism */
+.sidebar {
+  width: 280px;
+  background: var(--panel-bg);
+  border-right: 1px solid var(--border-color);
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(30px) saturate(200%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%);
+  z-index: 10;
+  border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  box-shadow: 10px 0 40px rgba(0, 0, 0, 0.2);
+}
+
+.auth-panel,
+.action-panel {
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  background: var(--panel-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+/* Modern AI Core (Replaces Iron Man Arc Reactor) */
+.reactor-circle {
+  width: 300px;
+  height: 300px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.1), rgba(176, 38, 255, 0.1));
+  box-shadow:
+    0 0 80px rgba(176, 38, 255, 0.3),
+    inset 0 0 40px rgba(0, 240, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.reactor-circle:hover {
+  transform: scale(1.08) rotate(5deg);
+  box-shadow:
+    0 0 120px rgba(0, 240, 255, 0.4),
+    inset 0 0 60px rgba(176, 38, 255, 0.3);
+}
+
+.reactor-core {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+  box-shadow: 0 0 80px 20px rgba(176, 38, 255, 0.4), 0 0 120px 40px rgba(0, 240, 255, 0.2);
+  animation: float-pulse 4s infinite alternate ease-in-out;
+}
+
+@keyframes float-pulse {
+  0% {
+    transform: scale(0.95) translateY(0px);
+    filter: hue-rotate(0deg);
+  }
+
+  100% {
+    transform: scale(1.05) translateY(-10px);
+    filter: hue-rotate(30deg);
+  }
+}
+
+/* Premium Gen-Z Button Styling */
+.action-btn,
+.auth-btn {
+  position: relative;
+  overflow: hidden;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 14px 24px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+  color: var(--text-main);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn:hover,
+.auth-btn:hover {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+  color: #fff;
+  border-color: transparent;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(176, 38, 255, 0.4);
+}
+
+/* Interactive Input */
+.jarvis-input,
+.input-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  padding: 16px 20px;
+  color: var(--text-main);
+  border-radius: var(--radius-md);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1.05rem;
+}
+
+.jarvis-input:focus,
+.input-box:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--neon-purple);
+  box-shadow: 0 0 20px rgba(176, 38, 255, 0.2), inset 0 0 10px rgba(0, 240, 255, 0.1);
+  outline: none;
+}
+
+/* Menu Items */
+.menu-item {
+  position: relative;
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 8px;
+  transition: all 0.3s;
+}
+
+.menu-item:hover,
+.menu-item.active {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), transparent);
+  box-shadow: inset 2px 0 0 var(--neon-cyan);
+  padding-left: 24px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
