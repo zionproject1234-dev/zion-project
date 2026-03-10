@@ -320,13 +320,20 @@ function App() {
   };
 
   const fetchTasks = async (userId) => {
+    console.log("Fetching tasks for user:", userId);
     const { data, error } = await supabase
       .from('tasks')
       .select('*')
       .eq('user_id', userId)
       .order('created_at', { ascending: true });
 
-    if (!error) setTasks(data || []);
+    if (error) {
+      console.error('Supabase fetch error:', error);
+      speak("Sir, I encountered a retrieval error from the cloud database.");
+    } else {
+      console.log("Tasks fetched successfully:", data);
+      setTasks(data || []);
+    }
   };
 
   const handleSignOut = async () => {
@@ -342,12 +349,18 @@ function App() {
   const addTask = async (title, priority = 'Medium') => {
     if (!session || !title.trim()) return;
 
+    console.log("Attempting to add task:", title);
     const { data, error } = await supabase
       .from('tasks')
       .insert([{ title: title.trim(), user_id: session.user.id, completed: false, priority }])
       .select();
 
-    if (!error && data && data[0]) {
+    if (error) {
+      console.error('Supabase insert error:', error);
+      alert(`Cloud sync failed: ${error.message}`);
+      speak("Sir, the cloud database rejected the directive. Please check the security policy.");
+    } else if (data && data[0]) {
+      console.log("Task added successfully:", data[0]);
       setTasks(prev => [...prev, data[0]]);
     }
 
